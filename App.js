@@ -5,13 +5,12 @@ import { useFonts } from 'expo-font';
 
 
 //Screens
-import LoginScreen from './screens/login'
-import RegisterScreen from './screens/register'
-import OnboardingStack from './screens/Onboarding'
+import LoginScreen from './screens/login';
+import RegisterScreen from './screens/register';
 
 //Stack
 import HomeTabs from './Navigation/HomeStack';
-import StartPageStack from './Navigation/StartPageStack'
+import StartPageStack from './Navigation/StartPageStack';
 
 
 const Stack = createNativeStackNavigator();
@@ -30,10 +29,9 @@ if (!loaded) {
 }
     return (
   
-       <NavigationContainer>
+      <NavigationContainer>
 
         <Stack.Navigator>
-         
           <Stack.Screen name="StartPage" component={StartPageStack} options={{ headerShown: false }}/>  
           <Stack.Screen name="Home" component={HomeTabs} options={{ headerShown: false }}/>
           <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
