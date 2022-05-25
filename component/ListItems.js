@@ -19,7 +19,7 @@ export default function ListItem({photo, title, subTitle, isFree, price, onPress
           <Text
             style={{
               color: '#333',
-              fontFamily: 'Roboto-Medium',
+              fontFamily: 'poppins-regular',
               fontSize: 14,
             }}>
             {subTitle}
@@ -28,7 +28,7 @@ export default function ListItem({photo, title, subTitle, isFree, price, onPress
             numberOfLines={1}
             style={{
               color: '#333',
-              fontFamily: 'Roboto-Medium',
+              fontFamily: 'poppins-regular',
               fontSize: 14,
               textTransform: 'uppercase',
             }}>
@@ -38,7 +38,7 @@ export default function ListItem({photo, title, subTitle, isFree, price, onPress
       </View>
 
       <TouchableOpacity onPress={onPress} style={{
-        backgroundColor:'#0aada8',
+        backgroundColor:'#bc8c4c',
         padding:10,
         width: 100,
         borderRadius: 10,
@@ -46,10 +46,10 @@ export default function ListItem({photo, title, subTitle, isFree, price, onPress
         <Text style={{
           color: '#fff',
           textAlign: 'center',
-          fontFamily: 'Roboto-Medium',
+          fontFamily: 'poppins-regular',
           fontSize: 14,
         }}>
-          {isFree == 'Yes' && 'Play'}
+          {isFree == 'Yes' && 'Order'}
           {isFree == 'No' && price}
         </Text>
       </TouchableOpacity>
