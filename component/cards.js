@@ -1,86 +1,54 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {  StyleSheet, View, FlatList, Text, TextInput, Pressable } from 'react-native';
-import { Button, Card, Title, Paragraph  } from 'react-native-paper';
-
+import {  Card, Title, Paragraph  } from 'react-native-paper';
+import { getAllMeals } from '../service/mealsService'
+import axios from 'axios';
 const Cards = () => {
+  const [ Data, setData ] = useState([])
+
+  useEffect(() => {
+    axios.get('http://192.168.137.1:8000/api/repas')
+    .then(res => {
+        console.log(res.data);
+        setData(res.data);
+    }).catch (err => {
+        console.log(err);
+        console.log('makin walo');
+    }) 
+},[])
+
   return (
     <View style={styles.container} >
-       <Card style={styles.content}>
-        <Card.Content style={styles.card}>
-          <Title style={styles.titel}>Pizza</Title>
-          <Paragraph>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, quod ut dolorum, unde possimus dicta voluptate iusto officiis </Paragraph>
-          <View style={styles.type}>
-               <Text style={styles.text} >Principal</Text>
-          </View>
-          <View style={styles.price}>
-               <Text style={styles.text} >$12</Text>
-          </View>
-        </Card.Content>
-    <Card.Cover style={styles.image} source={require('../assets/pizza.jpg')}/>
-    
-    <Card.Actions style={styles.order_session}>
-    <TextInput
-        keyboardType='numeric'
-          style={styles.TextInput}
-          placeholder="Quantity"
-          placeholderTextColor="#C1C0BB"
-        />
-      <Pressable style={styles.order_button}>
-         <Text style={styles.order} >Order</Text>
-      </Pressable>
-
-    </Card.Actions>
-  </Card>
-  <Card style={styles.content}>
-        <Card.Content>
-          <Title style={styles.titel}>Tagin L7oot</Title>
-          <Paragraph>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, quod ut dolorum, unde possimus dicta voluptate iusto officiis </Paragraph>
-          <View style={styles.type}>
-               <Text style={styles.text} >Principal</Text>
-          </View>
-          <View style={styles.price}>
-               <Text style={styles.text} >$12</Text>
-          </View>
-        </Card.Content>
-    <Card.Cover style={styles.image} source={require('../assets/Tajin.jpg')} />
-    <Card.Actions style={styles.order_session}>
-    <TextInput
-        keyboardType='numeric'
-          style={styles.TextInput}
-          placeholder="Quantity"
-          placeholderTextColor="#C1C0BB"
-        />
-      <Pressable style={styles.order_button}>
-         <Text style={styles.order} >Order</Text>
-      </Pressable>
-
-    </Card.Actions>
-  </Card>
-  <Card style={styles.content}>
-        <Card.Content>
-          <Title style={styles.titel}>Atay Bna3na3</Title>
-          <Paragraph>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, quod ut dolorum, unde possimus dicta voluptate iusto officiis </Paragraph>
-          <View style={styles.type}>
-               <Text style={styles.text} >Desert</Text>
-          </View>
-          <View style={styles.price}>
-               <Text style={styles.text} >$2</Text>
-          </View>
-        </Card.Content>
-    <Card.Cover style={styles.image} source={require('../assets/Atay.jpg')} />
-    <Card.Actions style={styles.order_session}>
-    <TextInput
-        keyboardType='numeric'
-          style={styles.TextInput}
-          placeholder="Quantity"
-          placeholderTextColor="#C1C0BB"
-        />
-      <Pressable style={styles.order_button}>
-         <Text style={styles.order} >Order</Text>
-      </Pressable>
-
-    </Card.Actions>
-  </Card>
+      {Data.map((items, index) =>(
+         <Card key={index} style={styles.content}>
+         <Card.Content style={styles.card}>
+           <Title style={styles.titel}>{items.title}</Title>
+           <Paragraph>{items.descreption}</Paragraph>
+           <View style={styles.type}>
+                <Text style={styles.text} >{items.type}</Text>
+           </View>
+           <View style={styles.price}>
+                <Text style={styles.text} >{items.price}$</Text>
+           </View>
+         </Card.Content>
+     <Card.Cover style={styles.image} source={require('../assets/pizza.jpg')}/>
+     
+     <Card.Actions style={styles.order_session}>
+     <TextInput
+         keyboardType='numeric'
+           style={styles.TextInput}
+           placeholder="Quantity"
+           placeholderTextColor="#C1C0BB"
+         />
+       <Pressable style={styles.order_button}>
+          <Text style={styles.order} >Order</Text>
+       </Pressable>
+ 
+     </Card.Actions>
+   </Card>
+      ))}
+      
+  
     </View>
   );
 }
